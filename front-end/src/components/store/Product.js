@@ -5,7 +5,7 @@ const Product = props => (
     <img src={props.product.image} alt={props.product.name} />
     <h4>{props.product.name}</h4>
     <p>单位:{props.product.price.toFixed(2)}元/{props.product.unit}</p>
-    <button>+</button>
+    <button onClick={() => {props.handleAddCart(props.product);}}>+</button>
   </div>
 );
 

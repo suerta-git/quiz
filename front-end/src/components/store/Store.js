@@ -4,7 +4,7 @@ import './Store.css';
 
 export default class Store extends React.Component {
   state = {
-    products: []
+    products: [],
   }
 
   componentDidMount = async () => {
@@ -20,7 +20,7 @@ export default class Store extends React.Component {
   render() {
     return (
       <section id="store">
-        {this.state.products.map(product => <Product product={product} key={product.name}/>)}
+        {this.state.products.map(product => <Product product={product} handleAddCart={this.props.handleAddCart} key={product.name}/>)}
       </section>
     )
   }
