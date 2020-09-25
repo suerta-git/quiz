@@ -1,7 +1,7 @@
 .App {
   text-align: center;
   background-color: rgb(228, 227, 227);
-  padding-top: 50px;
+  padding-top: 13vh;
   min-height: 100%;
 }
 
@@ -19,7 +19,7 @@ body, #root {
 }
 
 .page {
-  min-height: 82vh;
+  min-height: 75vh;
   background-color: white;
 }
 
@@ -59,7 +59,7 @@ body, #root {
 }
 
 .App>p {
-  height: 10vh;
+  height: 12vh;
   margin: auto;
-  line-height: 10vh;
+  line-height: 12vh;
 }
