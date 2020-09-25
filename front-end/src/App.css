@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  background-color: rgb(228, 227, 227);
+  padding-top: 50px;
+  overflow: auto;
 }
 
 .App-logo {
@@ -35,4 +38,8 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.App>p {
+  margin: 30px;
 }

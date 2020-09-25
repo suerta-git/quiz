@@ -9,6 +9,7 @@ function App() {
       <Router>
         <Route exact path="/" component={Store} />
       </Router>
+      <p>TW Mall @2018 Created by ForCheng</p>
     </div>
   );
 }
