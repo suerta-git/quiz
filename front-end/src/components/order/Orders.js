@@ -1,10 +1,11 @@
 import React from 'react';
 import Order from './Order';
+import './Orders.css';
 
 export default class Orders extends React.Component {
   render() {
     return (
-      <section id="orders">
+      <section className="page" id="orders">
         <table>
           <thead>
             <tr>

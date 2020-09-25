@@ -19,7 +19,7 @@ export default class Store extends React.Component {
 
   render() {
     return (
-      <section id="store">
+      <section className="page" id="store">
         {this.state.products.map(product => <Product product={product} handleAddCart={this.props.handleAddCart} key={product.name}/>)}
       </section>
     )

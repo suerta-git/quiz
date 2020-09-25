@@ -2,7 +2,25 @@
   text-align: center;
   background-color: rgb(228, 227, 227);
   padding-top: 50px;
+  min-height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
   overflow: auto;
+}
+
+body, #root {
+  height: 100%;
+}
+
+.page {
+  min-height: 82vh;
+  background-color: white;
 }
 
 .App-logo {
@@ -41,5 +59,7 @@
 }
 
 .App>p {
-  margin: 30px;
+  height: 10vh;
+  margin: auto;
+  line-height: 10vh;
 }

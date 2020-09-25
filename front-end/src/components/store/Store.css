@@ -1,7 +1,6 @@
 #store {
     margin: 0 20px;
     padding: 40px 20px;
-    background-color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -16,8 +15,10 @@
 }
 
 #store img {
-    width: 100%;
-    height: 250px;
+    max-width: 100%;
+    min-width: 100%;
+    width: auto;
+    height: auto;
 }
 
 #store h4, #store p {
