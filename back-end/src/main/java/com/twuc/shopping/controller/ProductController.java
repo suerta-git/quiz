@@ -9,7 +9,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @RestController
-public class GoodsController {
+public class ProductController {
     private final String url = "whatever";
     private final List<Product> products = new ArrayList<>(Arrays.asList(
             new Product("可乐1", 1, "罐", url),
@@ -17,7 +17,7 @@ public class GoodsController {
             new Product("可乐3", 5.057, "罐", url)
     ));
 
-    @GetMapping("/goods")
+    @GetMapping("/product")
     public List<Product> getProducts() {
         return products;
     }

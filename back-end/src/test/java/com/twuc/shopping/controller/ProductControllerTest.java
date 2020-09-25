@@ -20,7 +20,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @AutoConfigureMockMvc
 @SpringBootTest
-class GoodsControllerTest {
+class ProductControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -29,7 +29,7 @@ class GoodsControllerTest {
     private ObjectMapper objectMapper;
 
     @Test
-    public void should_return_goods_when_request() throws Exception {
+    public void should_return_products_when_request() throws Exception {
         final String url = "whatever";
         final List<Product> products = new ArrayList<>(Arrays.asList(
                 new Product("可乐1", 1, "罐", url),
@@ -37,7 +37,7 @@ class GoodsControllerTest {
                 new Product("可乐3", 5.057, "罐", url)
                 ));
         final String json = objectMapper.writeValueAsString(products);
-        mockMvc.perform(get("/goods"))
+        mockMvc.perform(get("/product"))
                 .andExpect(status().isOk())
                 .andExpect(content().json(json));
     }
