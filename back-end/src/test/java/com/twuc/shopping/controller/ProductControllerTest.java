@@ -2,6 +2,8 @@ package com.twuc.shopping.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.twuc.shopping.bo.Product;
+import com.twuc.shopping.service.ProductService;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -28,14 +30,24 @@ class ProductControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-    @Test
-    public void should_return_products_when_request() throws Exception {
+    @Autowired
+    private ProductService productService;
+
+    private List<Product> products;
+
+    @BeforeEach
+    private void setUp() {
         final String url = "whatever";
-        final List<Product> products = new ArrayList<>(Arrays.asList(
+        products = new ArrayList<>(Arrays.asList(
                 new Product("可乐1", 1, "罐", url),
                 new Product("可乐2", 2.01, "罐", url),
                 new Product("可乐3", 5.057, "罐", url)
-                ));
+        ));
+        productService.init(products);
+    }
+
+    @Test
+    public void should_return_products_when_request() throws Exception {
         final String json = objectMapper.writeValueAsString(products);
         mockMvc.perform(get("/product"))
                 .andExpect(status().isOk())
