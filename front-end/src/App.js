@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import Store from './components/store/Store';
 import Orders from './components/order/Orders';
 import './App.css';
+import Header from './components/header/Header';
 
 export default class App extends React.Component {
   state = {
@@ -12,6 +13,7 @@ export default class App extends React.Component {
     return (
       <div className="App">
         <Router>
+          <Header />
           <Route exact path="/" children={<Store handleAddCart={this.handleAddCart} />} />
           <Route path="/orders" children={<Orders orders={this.state.orders} />} />
         </Router>
