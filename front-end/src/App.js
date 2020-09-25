@@ -6,9 +6,7 @@ import './App.css';
 
 export default class App extends React.Component {
   state = {
-    orders: [
-
-    ]
+    orders: []
   }
   render() {
     return (
