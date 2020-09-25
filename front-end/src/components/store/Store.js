@@ -3,14 +3,14 @@ import Product from './Product';
 
 export default class Store extends React.Component {
   state = {
-    goods: []
+    products: []
   }
 
   componentDidMount = async () => {
     try {
-      const response = await fetch('http://localhost:3000/goods');
-      const goods = await response.json();
-      this.setState({ 'goods': goods });
+      const response = await fetch('http://localhost:3000/product');
+      const products = await response.json();
+      this.setState({ 'products': products });
     } catch (error) {
       console.log(error);
     }
@@ -19,7 +19,7 @@ export default class Store extends React.Component {
   render() {
     return (
       <section id="store">
-        {this.state.goods.map(product => <Product product={product} key={product.name}/>)}
+        {this.state.products.map(product => <Product product={product} key={product.name}/>)}
       </section>
     )
   }
