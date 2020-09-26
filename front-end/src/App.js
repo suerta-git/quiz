@@ -4,6 +4,7 @@ import Store from './components/store/Store';
 import Orders from './components/order/Orders';
 import './App.css';
 import Header from './components/header/Header';
+import AddProduct from './components/app-product/AddProduct';
 
 export default class App extends React.Component {
   state = {
@@ -16,6 +17,7 @@ export default class App extends React.Component {
           <Header />
           <Route exact path="/" children={<Store handleAddCart={this.handleAddCart} />} />
           <Route path="/orders" children={<Orders orders={this.state.orders} handleDeleteOrder={this.handleDeleteOrder} />} />
+          <Route path="/add-product" component={AddProduct} />
         </Router>
 
         <p>TW Mall @2018 Created by ForCheng</p>
