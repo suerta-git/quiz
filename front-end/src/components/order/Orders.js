@@ -17,7 +17,7 @@ export default class Orders extends React.Component {
             </tr>
           </thead>
           <tbody>
-            {this.props.orders.map(order => <Order order={order} key={order.name} />)}
+            {this.props.orders.map(order => <Order order={order} key={order.name} handleDeleteOrder={this.props.handleDeleteOrder} />)}
           </tbody>
         </table>
       </section>

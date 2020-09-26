@@ -15,7 +15,7 @@ export default class App extends React.Component {
         <Router>
           <Header />
           <Route exact path="/" children={<Store handleAddCart={this.handleAddCart} />} />
-          <Route path="/orders" children={<Orders orders={this.state.orders} />} />
+          <Route path="/orders" children={<Orders orders={this.state.orders} handleDeleteOrder={this.handleDeleteOrder} />} />
         </Router>
 
         <p>TW Mall @2018 Created by ForCheng</p>
@@ -42,6 +42,20 @@ export default class App extends React.Component {
         unit: product.unit
       });
     }
+    this.setState({
+      orders: orders
+    });
+  }
+
+  handleDeleteOrder = order => {
+    const orders = this.state.orders.concat();
+    let index = -1;
+    orders.forEach((eachOrder, i) => {
+      if (eachOrder.name === order.name) {
+        index = i;
+      }
+    });
+    orders.splice(index, 1);
     this.setState({
       orders: orders
     });
