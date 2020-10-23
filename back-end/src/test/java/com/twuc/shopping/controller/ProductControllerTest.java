@@ -1,13 +1,16 @@
 package com.twuc.shopping.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.twuc.shopping.bo.Product;
 import com.twuc.shopping.service.ProductService;
+import jdk.jfr.ContentType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.ArrayList;
@@ -52,5 +55,15 @@ class ProductControllerTest {
         mockMvc.perform(get("/product"))
                 .andExpect(status().isOk())
                 .andExpect(content().json(json));
+    }
+
+    @Test
+    public void should_add_product_when_request() throws Exception {
+        final Product product = new Product("new", 1, "unit", "image");
+        final String json = objectMapper.writeValueAsString(product);
+        mockMvc.perform(post("/product").contentType(MediaType.APPLICATION_JSON).content(json))
+                .andExpect(status().isCreated());
+        products.add(product);
+        assertEquals(products, productService.getProducts());
     }
 }

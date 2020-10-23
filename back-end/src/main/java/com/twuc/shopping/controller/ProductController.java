@@ -3,7 +3,11 @@ package com.twuc.shopping.controller;
 import com.twuc.shopping.bo.Product;
 import com.twuc.shopping.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -16,5 +20,11 @@ public class ProductController {
     @GetMapping("/product")
     public List<Product> getProducts() {
         return productService.getProducts();
+    }
+
+    @PostMapping("/product")
+    public ResponseEntity<Void> addProduct(@RequestBody Product product) {
+        productService.addProduct(product);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 }

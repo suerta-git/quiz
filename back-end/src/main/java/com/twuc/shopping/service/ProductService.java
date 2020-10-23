@@ -31,4 +31,12 @@ public class ProductService {
                 .collect(Collectors.toList())
         );
     }
+
+    public void addProduct(Product product) {
+        if (productRepository.existsByName(product.getName())) {
+            throw new IllegalArgumentException("product exist");
+        }
+        final ProductPO productPO = new ProductPO(product);
+        productRepository.save(productPO);
+    }
 }
