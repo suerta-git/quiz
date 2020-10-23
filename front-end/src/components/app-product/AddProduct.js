@@ -3,11 +3,12 @@ import { Modal, Input } from 'antd';
 
 export default class AddProduct extends React.Component {
   state = {
-    'add-name': '',
-    'add-price': '',
-    'add-unit': '',
-    'add-image': ''
-  }
+    "add-name": "",
+    "add-price": "",
+    "add-unit": "",
+    "add-image": "",
+    message: "",
+  };
 
   render() {
     return (
@@ -45,7 +46,7 @@ export default class AddProduct extends React.Component {
             id="add-unit"
             name="add-unit"
             placeholder="单位"
-            value={this.state['add-unit']}
+            value={this.state["add-unit"]}
             onChange={this.handleChange}
           />
           <label htmlFor="add-image">
@@ -56,7 +57,7 @@ export default class AddProduct extends React.Component {
             id="add-image"
             name="add-image"
             placeholder="URL"
-            value={this.state['add-image']}
+            value={this.state["add-image"]}
             onChange={this.handleChange}
           />
           <button
@@ -67,55 +68,68 @@ export default class AddProduct extends React.Component {
             提交
           </button>
         </form>
+        <h3 id="add-product-message">{this.state.message}</h3>
       </section>
     );
   }
 
-  handleChange = event => {
+  handleChange = (event) => {
     this.setState({
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     });
-  }
+  };
 
   isValid = () => {
-    return this.state['add-name'].length > 0 &&
-      this.state['add-price'].length > 0 &&
-      !Number.isNaN(Number(this.state['add-price'])) &&
-      this.state['add-unit'].length > 0 &&
-      this.state['add-image'].length > 0;
-  }
+    return (
+      this.state["add-name"].length > 0 &&
+      this.state["add-price"].length > 0 &&
+      !Number.isNaN(Number(this.state["add-price"])) &&
+      this.state["add-unit"].length > 0 &&
+      this.state["add-image"].length > 0
+    );
+  };
 
   handleSubmit = async () => {
     const product = {
-      name: this.state['add-name'],
-      price: Number(this.state['add-price']),
-      unit: this.state['add-unit'],
-      image: this.state['add-image']
+      name: this.state["add-name"],
+      price: Number(this.state["add-price"]),
+      unit: this.state["add-unit"],
+      image: this.state["add-image"],
     };
     this.clear();
 
     try {
-      const response = await fetch('http://localhost:8080/product', {
-        method: 'POST',
-        mode: 'cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(product)
+      this.message("正在创建商品……", true);
+      const response = await fetch("http://localhost:8080/product", {
+        method: "POST",
+        mode: "cors",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(product),
       });
-      const result = await response.json();
-      if (!result.success) {
-        throw new Error(result.message);
+      if (response.status !== 201) {
+        throw new Error();
       }
-    } catch (err) {
-      console.log('创建失败！');
+      this.message("商品创建成功！");
+    } catch (ignore) {
+      this.message("商品创建失败！");
     }
-  }
+  };
+
+  message = (info, isPermanent = false) => {
+    this.setState({
+      message: info,
+    });
+    if (!isPermanent) {
+      setTimeout(() => this.setState({ message: "" }), 3000);
+    }
+  };
 
   clear = () => {
     this.setState({
-      'add-name': '',
-      'add-price': '',
-      'add-unit': '',
-      'add-image': ''
+      "add-name": "",
+      "add-price": "",
+      "add-unit": "",
+      "add-image": "",
     });
-  }
+  };
 }
