@@ -1,10 +1,9 @@
 package com.twuc.shopping.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
+import static org.hamcrest.Matchers.is;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.twuc.shopping.bo.Product;
 import com.twuc.shopping.service.ProductService;
-import jdk.jfr.ContentType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +19,7 @@ import java.util.List;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @AutoConfigureMockMvc
 @SpringBootTest
@@ -65,5 +63,14 @@ class ProductControllerTest {
                 .andExpect(status().isCreated());
         products.add(product);
         assertEquals(products, productService.getProducts());
+    }
+
+    @Test
+    public void should_throw_error_when_add_product_with_existing_name() throws Exception {
+        final Product product = new Product("可乐1", 1, "unit", "image");
+        final String json = objectMapper.writeValueAsString(product);
+        mockMvc.perform(post("/product").contentType(MediaType.APPLICATION_JSON).content(json))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message", is("product exist")));
     }
 }
