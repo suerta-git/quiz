@@ -37,8 +37,8 @@ class OrderControllerTest {
     @BeforeEach
     private void init() {
         orders = new ArrayList<>(Arrays.asList(
-                new Order(),
-                new Order()
+                new Order(new ArrayList<>()),
+                new Order(new ArrayList<>())
         ));
         orderService.init(orders);
     }

@@ -19,7 +19,7 @@ public class OrderPO {
     @GeneratedValue
     private Integer id;
 
-    @OneToMany(mappedBy = "orderId", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ProductPairPO> productPairs;
 
     private Double totalPrice;
